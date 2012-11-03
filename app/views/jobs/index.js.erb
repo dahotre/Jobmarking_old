@@ -1,0 +1,9 @@
+$('#jobs').append(' <%= escape_javascript render @jobs %> ');
+$('.short_desc').show();
+$('.full_desc').css('display', 'none');
+<% if @jobs.next_page %>
+  $('.pagination').replaceWith('<%= will_paginate(@jobs) %>');
+<% else %>
+  $('.pagination').remove();
+<% end %>
+<% sleep 1 %>

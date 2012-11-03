@@ -1,0 +1,73 @@
+<%= form_for(@job, :class => 'form-horizontal') do |f| %>
+  <legend>Save Job posting for easy reference</legend>
+
+  <% if @job.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@job.errors.count, "error") %> prohibited this Job from being saved:</h2>
+
+      <ul>
+        <% @job.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @job.title.blank? %>
+    <p class="alert alert-danger"><i class="icon-exclamation-sign"></i> Please add title to this job posting</p>
+  <% end %>
+
+  <h3>
+    <%= link_to @job.url, :target => '_blank' do %>
+      <%= escape_javascript(raw(truncate(!@job.title.blank? ? @job.title : @job.url, :length => 60))) %>
+      <i class="icon-share-alt"></i>
+    <% end %>
+  </h3>
+
+  <p>
+    <%= render 'diff_hash' unless @job.diffHash.blank? %>
+  </p>
+
+  <div class="control-group">
+    <%= f.label(:url, "URL", :class => 'control-label') %>
+    <div class="controls">
+      <%= f.text_field(:url, :placeholder => 'e.g., http://www.example.com/jobid/1', :class => 'input-xxlarge') %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label(:title, "Job Title", :class => 'control-label') %>
+    <div class="controls">
+      <%= f.text_field(:title, :placeholder => 'e.g., Program Manager', :class => 'input-xxlarge') %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label(:location, "Location", :class => 'control-label') %>
+    <div class="controls">
+      <%= f.text_field(:location, :placeholder => 'e.g., Salt Lake City', :class => 'input-xxlarge') %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label(:description, "Description", :class => 'control-label') %>
+    <div class="controls">
+      <%= f.text_area(:description, :rows => rowsForDescription(@job.description), :class => 'input-xxlarge') %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= link_to refresh_job_url @job do %>
+      <i class="icon-refresh"></i> Refresh source
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit(:class => "btn btn-large btn-success") %>
+    <% if @job.errors.any? %>
+      <%= link_to 'Revert', edit_job_path(@job), :class => 'btn btn-large btn-warning' %>
+    <% end %>
+    <%= link_to 'Delete', @job, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-large btn-danger' %>
+    <%= link_to 'Back', jobs_path, :class => 'btn btn-large btn-info' %>
+  </div>
+<% end %>

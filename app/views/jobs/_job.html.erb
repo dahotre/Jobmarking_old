@@ -1,0 +1,50 @@
+<%= content_tag_for(:li, job) do %>
+
+  <h4>
+    <i class="icon-signal green-signal"></i>
+    <span class="short_desc">
+      <%= escape_javascript(raw(truncate(job.title.blank? ? job.url : job.title, :length => 50))) %>
+    </span>
+    <span class="full_desc">
+      <%= escape_javascript(raw(job.title.blank? ? job.url : job.title)) %>
+    </span>
+    <small>
+      <%= link_to edit_job_path(job) do %>
+        <i class="icon-edit"></i> Edit
+      <% end %>
+    </small>
+  </h4>
+  <div id="always_display_<%= job.id %>">
+  <p class="location_display">
+    <% unless job.location.blank? %>
+      <small><i class="icon-map-marker"></i> <%= job.location %></small>
+    <% end %>
+  </p>
+  <p id="description_display_<%= job.id %>" class="description_display">
+    <span class="short_desc">
+      <%= escape_javascript(raw(truncate(strip_tags(job.description), :length => 200))) %>
+      <span class="show_full_desc desc_link">more details &gt;&gt;</span>
+    </span>
+    <span class="full_desc">
+      <%= escape_javascript(raw(strip_tags(job.description))) %>
+      <span class="show_short_desc desc_link">&lt;&lt; less details</span>
+    </span>
+  </p>
+
+  <a data-toggle="modal" href="#modal_<%= job.id %>" class="job_share_link"><i class="icon-share"></i> Share</a> |
+
+  <%= link_to job.url, :target => '_blank' do %>
+    Apply <i class="icon-share-alt"></i>
+  <% end %> |
+  <%= link_to job, :confirm => 'Are you sure?', :method => :delete, :remote => false, :class => 'job_delete_link' do %>
+    <i class="icon-trash"></i> Delete
+  <% end %>
+  </div>
+  <div id="never_display_<%= job.id %>" class="never_display">
+    <%= link_to 'Needs Attention', edit_job_path(job), :class=>'btn btn-large btn-danger' %>
+  </div>
+  <br/>
+  <small><%= time_ago_in_words(job.created_at) %> ago.</small>
+
+
+<% end %>

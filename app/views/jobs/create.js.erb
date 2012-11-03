@@ -1,0 +1,22 @@
+<% if @job.errors.any? %>
+  <% @job.errors.full_messages.each do |msg| %>
+    $('#alert').html('');
+    $('#alert').removeClass('alert alert-success');
+    $('#alert').addClass('alert alert-danger');
+    $('#alert').append('<i class="icon-lock"></i>');
+    $('#alert').append(<%= '\'  ' + msg + '\'' %>);
+  <% end %>
+<% else %>
+  $('#alert').removeClass('alert alert-danger');
+  $('#alert').addClass('alert alert-success');
+  $('#alert').html('<i class="icon-ok"></i>  Job created.');
+  $('#jobs').prepend('<%= escape_javascript(render(@job)) %>');
+  $('.short_desc').show();
+  $('.full_desc').css('display', 'none');
+  <% if @job.title.blank? %>
+    $('#never_display_<%= @job.id %>').css('display', 'block');
+    $('#always_display_<%= @job.id %>').css('display', 'none');
+  <% end %>
+  $('#nojobs').remove();
+<% end %>
+    $('#job_form > form')[0].reset();

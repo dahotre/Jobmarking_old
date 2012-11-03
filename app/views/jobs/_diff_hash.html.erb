@@ -1,0 +1,13 @@
+<div class="refresh_diff">
+  <legend><i class="icon-warning-sign"></i>
+    <small> The new description is highlighted in green.</small>
+  </legend>
+  <%= raw @job.diffHash["description"] %>
+  <a class="btn btn-primary" id="edit_refresh_btn">Edit to save</a>
+  <span id="hidden_new_desc">
+    <%=  @job.newDesc %>
+  </span>
+</div>
+<span id="edit_refresh_directions"><i class="icon-circle-arrow-down"></i>
+  Confirm changes in the fields below
+</span>

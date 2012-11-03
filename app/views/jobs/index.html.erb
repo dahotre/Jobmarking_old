@@ -1,0 +1,10 @@
+<div id="job_form">
+  <%= render 'form' %>
+</div>
+
+<p id="alert"></p>
+<ul class="unstyled" id="jobs">
+  <%= render :partial => @jobs %>
+</ul>
+
+<%= will_paginate @jobs %>

@@ -1,9 +1,12 @@
 Jobmarking::Application.routes.draw do
 
-  resources :jobs
+  resources :lookups
+
+  resources :jobs do
+    get 'refresh', :on => :member
+  end
   resources :sessions
   resources :users
-  resources :lookups
 
   get "login" => "sessions#new", :as => "login"
   get "logout" => "sessions#destroy", :as => "logout"

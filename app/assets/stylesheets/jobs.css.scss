@@ -1,3 +1,164 @@
 // Place all the styles related to the jobs controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+#jobs {
+  border: 1px solid lightgray;
+  border-radius: 5px 5px 0 0;
+  padding: 5px;
+  background-color: FloralWhite;
+}
+
+#jobs li {
+  border-bottom: 1px solid lightgray;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+}
+
+#jobs h4 .short_desc {
+  cursor: default;
+}
+
+#jobs h4 .short_desc:hover {
+  color: #666666;
+}
+
+#job_alert {
+  display: none;
+}
+
+.refresh_diff {
+  overflow: auto;
+  padding: 1em;
+}
+
+.diff ul {
+  overflow: auto;
+  font-size: 13px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: table;
+  width: 100%;
+}
+
+.diff del, .diff ins {
+  display: block;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+.diff li {
+  padding: 0;
+  display: table-row;
+  margin: 0;
+  height: 1em;
+}
+
+.diff li.ins {
+  background: #dfd;
+  color: #080
+}
+
+.diff li.del {
+  background: #fee;
+  color: #b00
+}
+
+.diff del, .diff ins, .diff span {
+  white-space: pre-wrap;
+}
+
+.diff del strong {
+  font-weight: normal;
+  background: #fcc;
+}
+
+.diff ins strong {
+  font-weight: normal;
+  background: #9f9;
+}
+
+#hidden_new_desc {
+  display: none;
+}
+
+#edit_refresh_directions {
+  display: none;
+  color: #ff8c00;
+  font-family: 'Alfa Slab One', Arial;
+  font-size: x-large;
+}
+
+.location_display {
+  color: DarkOrange;
+}
+
+.job_delete_link {
+  color: Gray;
+}
+
+.job_share_link {
+  color: ForestGreen;
+}
+
+.green-signal {
+  color: Green;
+}
+
+.red-signal {
+  color: Red;
+}
+
+.desc_link {
+  color: rgb(0, 136, 204);
+  cursor: pointer;
+  font-style: italic;
+}
+
+.full_desc {
+  display: block;
+}
+
+.short_desc {
+  display: none;
+}
+
+/* Pagination */
+.pagination {
+  background: #f1f1f1;
+  border: 1px solid #e5e5e5;
+  text-align: center;
+  padding: 1em;
+  cursor: default;
+}
+
+.pagination a, .pagination span {
+  padding: 0.2em 0.3em;
+}
+
+.pagination .disabled {
+  color: #aaaaaa;
+}
+
+.pagination .current {
+  font-style: normal;
+  font-weight: bold;
+  background-color: #bebebe;
+  display: inline-block;
+  width: 1.4em;
+  height: 1.4em;
+  line-height: 1.5;
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+  text-shadow: rgba(255, 255, 255, 0.8) 1px 1px 1px;
+}
+
+.pagination a {
+  text-decoration: none;
+  color: black;
+}
+
+.pagination a:hover, .pagination a:focus {
+  text-decoration: underline;
+}

@@ -1,0 +1,27 @@
+<legend>We have covered <span class='label label-info'><%= escape_javascript @lookup.domain %></span> </legend>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Domain:</b>
+  <%= escape_javascript @lookup.domain %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @lookup.title %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @lookup.location %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @lookup.description %>
+</p>
+
+
+<%= link_to 'Edit', edit_lookup_path(@lookup) %> |
+<%= link_to 'Back', lookups_path %>

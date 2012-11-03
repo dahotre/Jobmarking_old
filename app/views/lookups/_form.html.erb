@@ -1,0 +1,57 @@
+<%= form_for(@lookup, :html => {:class => 'form-horizontal'}) do |f| %>
+<legend>You are the star of our society !</legend>
+  <div class="alert alert-info" id="xpath_info_well">
+    Please refer to <%= link_to 'XPath Tutorial', 'http://www.w3schools.com/xpath/default.asp' , :target=>'_blank', :style=>'color:tomato'%> to add the correct XPaths for <em>Title, Description, and Job Requirement</em>.
+  </div>
+  <div class="alert">
+    <small>If URL of the job is <a>https://www.jobs.company.com/browse?jobid=33</a>
+    , choose ONLY <span class="label label-important">company</span> in the <span style="color: tomato;">domain</span> field. Leave out everything else such as <em>protocol, subdomain, public suffix, query string, etc.</em>
+    </small>
+  </div>
+  
+  <% if @lookup.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lookup.errors.count, "error") %> prohibited this lookup from being saved:</h2>
+
+      <ul>
+      <% @lookup.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group" >
+    <%= f.label :domain, :class=>'control-label' %>
+    <div class="controls">
+      <%= f.text_field :domain, :placeholder => 'linkedin', :class=>'input-small' %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <%= f.label :title, 'Title XPath', :class=>'control-label'  %>
+    <div class="controls">
+    <%= f.text_field :title, :placeholder => '//h1[@itemprop="title"]', :class=>'input-xlarge' %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <%= f.label :location, 'Location XPath', :class=>'control-label'  %>
+    <div class="controls">
+    <%= f.text_field :location, :placeholder => '//h1[@itemprop="jobLocation"]', :class=>'input-xlarge' %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <%= f.label :description, 'Description XPath', :class=>'control-label'  %>
+    <div class="controls">
+    <%= f.text_field :description, :placeholder => '//div[@itemprop="description"]', :class=>'input-xlarge' %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <div class="controls">
+    <%= f.submit :class => 'btn btn-success' %>
+    </div>
+  </div>
+<% end %>

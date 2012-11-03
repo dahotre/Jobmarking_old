@@ -1,10 +1,8 @@
-require 'Diffy'
-
 class JobsController < ApplicationController
   before_filter :require_login
 
   # GET /jobs
-  # GET /jobs.xml
+  # GET /jobs.json
   def index
     @jobs = Job.paginate_by_sql(['select * from jobs where user_id = ? order by id desc', current_user.id],
                                 :page => params[:page], :per_page => 5)
@@ -13,28 +11,28 @@ class JobsController < ApplicationController
     respond_to do |format|
       format.js
       format.html # index.html.erb
-      format.xml  { render :xml => @jobs }
+      format.json { render :json => @jobs }
     end
   end
 
   # GET /jobs/1
-  # GET /jobs/1.xml
+  # GET /jobs/1.json
   def show
     @job = Job.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @job }
+      format.json { render :json => @job }
     end
   end
 
   # GET /jobs/new
-  # GET /jobs/new.xml
+  # GET /jobs/new.json
   def new
     @job = Job.new
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @job }
+      format.json { render :json => @job }
     end
   end
 
@@ -44,7 +42,7 @@ class JobsController < ApplicationController
   end
 
   # POST /jobs
-  # POST /jobs.xml
+  # POST /jobs.json
   def create
     @job = Job.new(params[:job])
 
@@ -62,13 +60,13 @@ class JobsController < ApplicationController
         if @job.save
           logger.debug 'out of save'
           format.html { redirect_to(@job, :notice => 'Job was successfully created.') }
-          format.xml  { render :xml => @job, :status => :created, :location => @job }
+          format.json { render :json => @job, :status => :created, :location => @job }
           format.js
         else
           logger.error 'error in save..'
           logger.error @job.errors
           format.html { render :action => "new" }
-          format.xml  { render :xml => @job.errors, :status => :unprocessable_entity }
+          format.json { render :json => @job.errors, :status => :unprocessable_entity }
           format.js
         end
       end
@@ -76,18 +74,18 @@ class JobsController < ApplicationController
   end
 
   # PUT /jobs/1
-  # PUT /jobs/1.xml
+  # PUT /jobs/1.json
   def update
     @job = Job.find(params[:id])
     if @job.user_id.eql? current_user.id
       respond_to do |format|
         if @job.update_attributes(params[:job])
           format.html { render :action => "edit", :notice => 'Job was successfully updated.' }
-          format.xml  { head :ok }
+          format.json { head :no_content }
           format.js
         else
           format.html { render :action => "edit" }
-          format.xml  { render :xml => @job.errors, :status => :unprocessable_entity }
+          format.json { render :json => @job.errors, :status => :unprocessable_entity }
           format.js
         end
       end
@@ -97,7 +95,7 @@ class JobsController < ApplicationController
   end
 
   # DELETE /jobs/1
-  # DELETE /jobs/1.xml
+  # DELETE /jobs/1.json
   def destroy
     logger.debug 'in destroy'
     @job = Job.find(params[:id])
@@ -105,7 +103,7 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(jobs_url) }
-      format.xml  { head :ok }
+      format.json { head :no_content }
       format.js
     end
   end
@@ -128,7 +126,6 @@ class JobsController < ApplicationController
 
     respond_to do |format|
       format.html { render :action => "edit", :notice => 'Job Details refreshed.' }
-      format.xml  { head :ok }
       format.js
     end
 

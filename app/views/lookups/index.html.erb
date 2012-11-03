@@ -1,0 +1,12 @@
+<legend>Help us improve by adding more lookups</legend>
+
+<%= link_to new_lookup_path do %>
+  <i class='icon-plus'></i> Add Lookup
+<% end %>
+<br />
+
+<div class="well well-large">
+  <% @lookups.each do |lookup| %>
+    <%= link_to escape_javascript(lookup.domain), lookup %>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <% end %>
+</div>

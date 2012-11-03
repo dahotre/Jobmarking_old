@@ -1,0 +1,13 @@
+<%= form_tag sessions_path do %>
+  <legend>Can't wait to save that job !</legend>
+  <div class="field">
+    <%= label_tag :email %>
+    <%= text_field_tag :email, params[:email] %>
+  </div>
+  <div class="field">
+    <%= label_tag :password %>
+    <%= password_field_tag :password %>
+  </div>
+
+  <div class="actions"><%= submit_tag "Log in", :class=>'btn' %></div>
+<% end %>

@@ -11,3 +11,12 @@
  *= require_self
  *= require_tree .
  */
+
+
+#logo {
+  color: ForestGreen;
+  text-decoration: none;
+}
+.never_display {
+  display: none;
+}

@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 <head>
   <title>Jobmarking</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
@@ -10,10 +13,48 @@
 </head>
 <body>
 
-<%= yield %>
+<div class="container">
+  <div class="row">
+    <h3 class="span2">
+      <%= link_to root_path, :id=>"logo" do %>
+        Jobmarking <i class="icon-bookmark" style="color: Tomato;"></i>
+      <% end %>
+    </h3>
+    <div class="span1">
+      <%= link_to root_path  do %>
+        explore <i class="icon-search"style="color: forestGreen;"></i>
+      <% end %>
+
+      <%= link_to lookups_path  do %>
+        hackers <i class="icon-bullhorn" style="color: tomato;"></i>
+      <% end %>
+    </div>
+    <div class="span6">
+      <%= yield %>
+    </div>
+    <div class="span3">
+      <% if current_user %>
+        <%= current_user.email %>
+        <small><%= link_to "log out", logout_path %></small><br/>
+      <% else %>
+        <%= link_to "sign up", signup_path %><br />
+        <%= link_to "log in", login_path %><br />
+      <% end %>
+      <%= link_to "https://github.com/dahotre/jobmarking-bugs/issues", :target=>'_blank' do %>
+        report bug <i class="icon-github" style="color: black;"></i>
+      <% end %>
+      <br />
+      <%= mail_to "aniket@dahotre.com", "contact", :encode => "hex", :subject=>"I got a better idea", :body=>"Aniket,  \nYou should definitely take a look at this idea.\n\nCheers,\n#{current_user.email if current_user}" %>
+      <%= yield :right_info %>
+
+      <!-- For monetization! -->
+    </div>
+  </div>
+</div>
 
 
 
 <%= javascript_include_tag "application" %>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400|Alfa+Slab+One' rel='stylesheet' type='text/css'>
 </body>
 </html>

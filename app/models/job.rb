@@ -23,9 +23,9 @@ class Job < ActiveRecord::Base
       response = responseAndUrlHash[:response]
 
       domainName = Domainatrix.parse(self.acturl).domain
-      logger.debug 'Domain is ' + domain
+      logger.debug 'Domain is ' + domainName
 
-      parsedDetails = urlParser.parseHtmlToFindDetails(domain.downcase, response)
+      parsedDetails = urlParser.parseHtmlToFindDetails(domainName.downcase, response)
       self.title = parsedDetails[:title]
       self.description = parsedDetails[:description]
       self.location = parsedDetails[:location]

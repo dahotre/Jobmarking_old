@@ -114,7 +114,7 @@ class UrlParser
 
   def getResponse(url)
     responseAndUrlHash = fetch url
-    logger.debug responseAndUrlHash[:response].class
+    Rails.logger.debug responseAndUrlHash[:response].class
     unless responseAndUrlHash[:response].is_a? Net::HTTPSuccess
       Rails.logger.error 'Response after redirect is still NOT a success..'
       raise 'Problems finding the actual page for this URL.'

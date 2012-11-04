@@ -9,35 +9,33 @@ class Job < ActiveRecord::Base
   validates_presence_of :url
   validates_format_of :url, :with => /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix
 
-  before_create :redirect_und_parse
+  before_create :redirectAndParse
 
   attr_accessor :diffHash, :newDesc
+  attr_accessible :url
 
-  def redirect_und_parse
-    logger.info 'begin redirect_und_parse'
+  def redirectAndParse
+    logger.debug 'begin redirectAndParse'
     begin
-      response = let_redirect
-      parsedUrl = Domainatrix.parse(self.acturl)
-      logger.info 'got to ' + parsedUrl.domain
-      UrlParser.parse parsedUrl.domain.downcase, response, self
+      urlParser = UrlParser.new
+      responseAndUrlHash = urlParser.getResponse self.url
+      self.acturl = responseAndUrlHash[:url]
+      response = responseAndUrlHash[:response]
+
+      domainName = Domainatrix.parse(self.acturl).domain
+      logger.debug 'Domain is ' + domain
+
+      parsedDetails = urlParser.parseHtmlToFindDetails(domain.downcase, response)
+      self.title = parsedDetails[:title]
+      self.description = parsedDetails[:description]
+      self.location = parsedDetails[:location]
+
     rescue ArgumentError => ae
       self.warn = 'This URL redirects indefinitely. Please verify.'
     rescue Exception => e
       self.warn = e.message
     end
 
-  end
-
-  def let_redirect
-    fetch_resp = UrlParser.fetch self.url
-    logger.info fetch_resp[:response].class
-    if fetch_resp[:response].is_a? Net::HTTPSuccess
-      logger.info 'response is a succes: ' + fetch_resp[:url]
-      self.acturl = fetch_resp[:url]
-      return fetch_resp[:response]
-    else
-      raise 'Problems finding the actual page for this URL.'
-    end
   end
 
 end

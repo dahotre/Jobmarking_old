@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121103082843) do
+ActiveRecord::Schema.define(:version => 20121104003953) do
 
   create_table "jobs", :force => true do |t|
     t.string   "url"
@@ -30,11 +30,11 @@ ActiveRecord::Schema.define(:version => 20121103082843) do
     t.string   "domain"
     t.string   "title"
     t.string   "description"
-    t.string   "requirement"
-    t.boolean  "deleted",     :default => false
+    t.boolean  "deleted",         :default => false
     t.string   "location"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.integer  "otherDomainHits"
   end
 
   create_table "users", :force => true do |t|

@@ -113,7 +113,7 @@ class JobsController < ApplicationController
     newJob = Job.new
     @job = Job.find(params[:id])
     newJob.url= @job.url
-    newJob.redirect_und_parse
+    newJob.redirectAndParse
     diffHash = Hash.new
 
     # Add other diffs if necessary

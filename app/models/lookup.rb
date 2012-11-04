@@ -1,3 +1,4 @@
 class Lookup < ActiveRecord::Base
-  # attr_accessible :title, :body
+  validates_uniqueness_of :domain
+  validates_presence_of :domain, :title, :description
 end

@@ -98,7 +98,7 @@ class UrlParser
         doc.xpath('//style').remove
 
         title = Sanitize.clean(doc.xpath(lookup.title).to_s).gsub(/\s+/, " ")
-        description = Sanitize.clean(doc.xpath(lookup.description).to_s).gsub(/\s+/, " ")
+        description = Sanitize.clean(doc.xpath(lookup.description).to_s, :elements => ['br']).gsub(/\s+/," ")
         location = Sanitize.clean(doc.xpath(lookup.location).to_s).gsub(/\s+/, " ")
 
         return {:title => title, :description => description, :location => location}

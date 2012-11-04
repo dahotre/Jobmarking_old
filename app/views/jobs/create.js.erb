@@ -11,8 +11,9 @@
   $('#alert').addClass('alert alert-success');
   $('#alert').html('<i class="icon-ok"></i>  Job created.');
   $('#jobs').prepend('<%= escape_javascript(render(@job)) %>');
-  $('.short_desc').show();
-  $('.full_desc').css('display', 'none');
+
+  toggleDescriptions();
+
   <% if @job.title.blank? %>
     $('#never_display_<%= @job.id %>').css('display', 'block');
     $('#always_display_<%= @job.id %>').css('display', 'none');

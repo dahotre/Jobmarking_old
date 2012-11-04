@@ -15,21 +15,21 @@
     </small>
   </h4>
   <div id="always_display_<%= job.id %>">
-  <p class="location_display">
+  <div class="location_display">
     <% unless job.location.blank? %>
       <small><i class="icon-map-marker"></i> <%= job.location %></small>
     <% end %>
-  </p>
-  <p id="description_display_<%= job.id %>" class="description_display">
-    <span class="short_desc">
+  </div>
+  <div id="description_display_<%= job.id %>" class="description_display">
+    <div class="short_desc">
       <%= escape_javascript(raw(truncate(strip_tags(job.description), :length => 200))) %>
       <span class="show_full_desc desc_link">more details &gt;&gt;</span>
-    </span>
-    <span class="full_desc">
-      <%= escape_javascript(raw(strip_tags(job.description))) %>
+    </div>
+    <div class="full_desc">
+      <%= raw job.description %>
       <span class="show_short_desc desc_link">&lt;&lt; less details</span>
-    </span>
-  </p>
+    </div>
+  </div>
 
   <a data-toggle="modal" href="#modal_<%= job.id %>" class="job_share_link"><i class="icon-share"></i> Share</a> |
 

@@ -1,15 +1,21 @@
-$('.short_desc').show();
-$('.full_desc').css('display', 'none');
 
-$('.show_full_desc').click(function() {
-  $(this).parent().parent().parent().find('.short_desc').hide();
-  $(this).parent().parent().parent().find('.full_desc').show();
-});
 
-$('.show_short_desc').click(function() {
-  $(this).parent().parent().parent().find('.short_desc').show();
-  $(this).parent().parent().parent().find('.full_desc').hide();
-});
+var toggleDescriptions = function () {
+  $('.short_desc').show();
+  $('.full_desc').css('display', 'none');
+
+  $('.show_full_desc').click(function () {
+    $(this).parent().parent().parent().find('.short_desc').hide();
+    $(this).parent().parent().parent().find('.full_desc').show();
+  });
+
+  $('.show_short_desc').click(function () {
+    $(this).parent().parent().parent().find('.short_desc').show();
+    $(this).parent().parent().parent().find('.full_desc').hide();
+  });
+};
+
+toggleDescriptions();
 
 $('.job h4').click(function() {
   $(this).parent().find('.short_desc').hide();

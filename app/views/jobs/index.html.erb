@@ -1,10 +1,18 @@
+<% content_for :left_info do %>
+
+<% end %>
+
 <div id="job_form">
   <%= render 'form' %>
 </div>
 
 <p id="alert"></p>
 <ul class="unstyled" id="jobs">
-  <%= render :partial => @jobs %>
+  <% if @jobs.blank? %>
+    <li class="job" id="noJob">No jobs added yet..</li>
+  <% else %>
+    <%= render :partial => @jobs %>
+   <% end %>
 </ul>
 
 <%= will_paginate @jobs %>

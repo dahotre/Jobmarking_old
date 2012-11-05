@@ -59,6 +59,11 @@ class JobsController < ApplicationController
       respond_to do |format|
         if @job.save
           logger.debug 'out of save'
+          begin
+            PostsHelper.createPost @job
+          rescue  Exception => e
+            logger.error e.message
+          end
           format.html { redirect_to(@job, :notice => 'Job was successfully created.') }
           format.json { render :json => @job, :status => :created, :location => @job }
           format.js
